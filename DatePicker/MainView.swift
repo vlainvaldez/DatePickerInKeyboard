@@ -168,7 +168,7 @@ public final class MainView: UIView {
             make.width.equalToSuperview()
         }
         
-        self.birthDateLabel.snp.remakeConstraints { [unowned self] (make: ConstraintMaker) -> Void in
+        self.birthDateLabel.snp.remakeConstraints { (make: ConstraintMaker) -> Void in
             make.top.equalToSuperview().offset(20.0)
             make.leading.equalToSuperview()
         }
@@ -201,6 +201,14 @@ public final class MainView: UIView {
             selector: #selector(MainView.donePicker)
         )
         
+//        self.birthDateTextField.inputView = self.birthDatePicker
+//        
+//        self.birthDateTextField.addInputAccessoryView(
+//            title: "Done",
+//            target: self,
+//            selector: #selector(MainView.donePicker)
+//        )
+        
     }
     
     public required init?(coder aDecoder: NSCoder) {
@@ -223,15 +231,6 @@ extension MainView: UITextFieldDelegate {
     }
     
     public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        
-        if textField == self.birthDateTextField {
-            self.birthDateTextField.inputView = self.birthDatePicker
-            self.birthDateTextField.addInputAccessoryView(
-                title: "Done",
-                target: self,
-                selector: #selector(MainView.donePicker)
-            )
-        }
         
         return true
     }

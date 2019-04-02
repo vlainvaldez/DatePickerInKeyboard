@@ -17,13 +17,32 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        self.rootView.birthDateTextField.inputView = self.rootView.birthDatePicker
+        
+        self.rootView.birthDateTextField.addInputAccessoryView(
+            title: "Done",
+            target: self,
+            selector: #selector(ViewController.donePicker)
+        )        
     }
 
-
+    private var rootView: MainView { return self.view as! MainView }
+    
+    @objc func donePicker() {
+        switch self.rootView.birthDateTextField.isEditing {
+        case true:
+            self.rootView.birthDateTextField.resignFirstResponder()
+        case false:
+            self.view.endEditing(true)
+        }
+    }
 }
 
 
 extension UIView {
+    
+    
     
     func subview(forAutoLayout subview: UIView) {
         self.addSubview(subview)
